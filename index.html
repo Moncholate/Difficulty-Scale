@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Difficulty Monster Scale</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: #f0f8ff;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .scale {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .monster {
+      border: 2px solid #ccc;
+      border-radius: 1rem;
+      padding: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .monster:hover {
+      transform: scale(1.1);
+      background-color: #e0f7fa;
+    }
+    .monster.selected {
+      background-color: #b2ebf2;
+      border-color: #00796b;
+    }
+    .emoji {
+      font-size: 2.5rem;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+  <h1>💥 Did You Defeat the Class… or Did It Defeat You? 💥</h1>
+  <div class="scale">
+    <div class="monster" onclick="selectMonster(1)">
+      <div class="emoji">🦄</div>
+      <div>Too easy</div>
+    </div>
+    <div class="monster" onclick="selectMonster(2)">
+      <div class="emoji">🐣</div>
+      <div>Pretty easy</div>
+    </div>
+    <div class="monster" onclick="selectMonster(3)">
+      <div class="emoji">🧠</div>
+      <div>Challenging</div>
+    </div>
+    <div class="monster" onclick="selectMonster(4)">
+      <div class="emoji">🧟</div>
+      <div>Hard</div>
+    </div>
+    <div class="monster" onclick="selectMonster(5)">
+      <div class="emoji">💀</div>
+      <div>Class KO’d me!</div>
+    </div>
+  </div>
+  <div id="result">Select your monster!</div>
+
+  <script>
+    let selected = null;
+    function selectMonster(level) {
+      const monsters = document.querySelectorAll('.monster');
+      monsters.forEach((el, idx) => {
+        el.classList.remove('selected');
+        if (idx === level - 1) {
+          el.classList.add('selected');
+        }
+      });
+
+      const messages = [
+        "🦄 You totally crushed it!",
+        "🐣 No sweat – a chill session!",
+        "🧠 Great challenge – you leveled up!",
+        "🧟 Brain fried but survived!",
+        "💀 The class KO’d you – next time, hero!"
+      ];
+
+      document.getElementById('result').innerText = messages[level - 1];
+    }
+  </script>
+</body>
+</html>
