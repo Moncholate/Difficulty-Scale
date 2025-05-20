@@ -2,98 +2,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class Difficulty Monster Scale</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monster Difficulty Scale</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 2rem;
-      background: #f0f8ff;
+      padding: 20px;
     }
     h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      font-size: 2em;
     }
-    .scale {
+    .monsters {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
+      gap: 10px;
+      margin-top: 20px;
+      font-size: 2rem;
+      cursor: pointer;
     }
     .monster {
-      border: 2px solid #ccc;
-      border-radius: 1rem;
-      padding: 1rem;
-      cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      padding: 10px;
+      border: 2px solid transparent;
+      border-radius: 10px;
     }
     .monster:hover {
-      transform: scale(1.1);
-      background-color: #e0f7fa;
-    }
-    .monster.selected {
-      background-color: #b2ebf2;
-      border-color: #00796b;
-    }
-    .emoji {
-      font-size: 2.5rem;
+      background-color: #f0f0f0;
     }
     #result {
-      margin-top: 2rem;
-      font-size: 1.2rem;
+      margin-top: 30px;
+      font-size: 1.2em;
       font-weight: bold;
-      color: #00796b;
     }
   </style>
 </head>
 <body>
-  <h1>💥 Did You Defeat the Class… or Did It Defeat You? 💥</h1>
-  <div class="scale">
-    <div class="monster" onclick="selectMonster(1)">
-      <div class="emoji">🦄</div>
-      <div>Too easy</div>
-    </div>
-    <div class="monster" onclick="selectMonster(2)">
-      <div class="emoji">🐣</div>
-      <div>Pretty easy</div>
-    </div>
-    <div class="monster" onclick="selectMonster(3)">
-      <div class="emoji">🧠</div>
-      <div>Challenging</div>
-    </div>
-    <div class="monster" onclick="selectMonster(4)">
-      <div class="emoji">🧟</div>
-      <div>Hard</div>
-    </div>
-    <div class="monster" onclick="selectMonster(5)">
-      <div class="emoji">💀</div>
-      <div>Class KO’d me!</div>
-    </div>
+  <h1>How difficult was today's class?</h1>
+  <div class="monsters">
+    <div class="monster" onclick="vote('🦄 Too easy')">🦄</div>
+    <div class="monster" onclick="vote('🐣 Pretty easy')">🐣</div>
+    <div class="monster" onclick="vote('🧠 Challenging')">🧠</div>
+    <div class="monster" onclick="vote('🧟 Hard')">🧟</div>
+    <div class="monster" onclick="vote('💀 Class KO’d me!')">💀</div>
   </div>
   <div id="result">Select your monster!</div>
 
+  <h2>Live Voting Results</h2>
+  <iframe width="600" height="371" seamless frameborder="0" scrolling="no" 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQkdCBhX6AG-7vxOZawkLp771i9cfcr4gvXEqJDhv_iVX1jJC5bPn4Cxw0nm5VHeiWIg3YYuhnB_DEH/pubchart?oid=1434421832&amp;format=interactive">
+  </iframe>
+
   <script>
-    let selected = null;
-    function selectMonster(level) {
-      const monsters = document.querySelectorAll('.monster');
-      monsters.forEach((el, idx) => {
-        el.classList.remove('selected');
-        if (idx === level - 1) {
-          el.classList.add('selected');
-        }
-      });
-
-      const messages = [
-        "🦄 You totally crushed it!",
-        "🐣 No sweat – a chill session!",
-        "🧠 Great challenge – you leveled up!",
-        "🧟 Brain fried but survived!",
-        "💀 The class KO’d you – next time, hero!"
-      ];
-
-      document.getElementById('result').innerText = messages[level - 1];
+    function vote(choice) {
+      document.getElementById('result').textContent = "You chose: " + choice;
     }
   </script>
 </body>
